@@ -5,6 +5,18 @@
     <div class="row">
         <div class="col">
             <h1>Komik</h1>
+
+            <a href="<?= base_url("komik/create") ?>" class="btn btn-primary my-3">+ Komik</a>
+
+            <?php if (session()->getFlashdata("pesan")) : ?>
+                <div class="alert alert-success alert-dismissible fade show mb-3" role="alert">
+                    <strong><?= session()->getFlashdata("pesan") ?></strong>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            <?php endif; ?>
+
             <table class="table">
                 <thead>
                     <tr>

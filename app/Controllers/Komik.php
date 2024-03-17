@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Models\KomikModel;
+use CodeIgniter\Exceptions\PageNotFoundException;
 use CodeIgniter\HTTP\ResponseInterface;
 use Config\Database;
 
@@ -40,6 +41,34 @@ class Komik extends BaseController
         // $komik = $this->komikModel->where("slug", $slug)->first();
         $data['komik'] = $this->komikModel->getKomik($slug);
 
+        if (!$data["komik"]) {
+            throw new PageNotFoundException("Judul komik $slug tidak ditemukan");
+        }
+
         return view("komik/detail", $data);
+    }
+
+    public function create()
+    {
+        $data["title"] = "Tambah Komik";
+
+        return view("komik/create", $data);
+    }
+
+    public function save()
+    {
+        $slug = url_title($this->request->getPost("judul"), "-", "true");
+
+        $this->komikModel->save([
+            "judul" => $this->request->getPost("judul"),
+            "slug" => $slug,
+            "penulis" => $this->request->getPost("penulis"),
+            "penerbit" => $this->request->getPost("penerbit"),
+            "sampul" => $this->request->getPost("sampul"),
+        ]);
+
+        session()->setFlashdata("pesan", "Data berhasil ditambahkan");
+
+        return redirect()->to("/komik");
     }
 }
