@@ -3,6 +3,7 @@
 use App\Controllers\Admin\Dashboard;
 use App\Controllers\Coba;
 use App\Controllers\Home;
+use App\Controllers\Komik;
 use App\Controllers\Pages;
 use CodeIgniter\Router\RouteCollection;
 
@@ -25,3 +26,5 @@ $routes->get("/fungsi", function () {
 $routes->get("/", [Pages::class, "index"]);
 $routes->get("/about", [Pages::class, "about"]);
 $routes->get("/contact", [Pages::class, "contact"]);
+
+$routes->get("/komik", [Komik::class, "index"]);

@@ -1,0 +1,35 @@
+<?php
+
+namespace App\Controllers;
+
+use App\Controllers\BaseController;
+use App\Models\KomikModel;
+use CodeIgniter\HTTP\ResponseInterface;
+use Config\Database;
+
+class Komik extends BaseController
+{
+    protected $komikModel;
+
+    public function __construct()
+    {
+        $this->komikModel = new KomikModel();
+    }
+
+    public function index()
+    {
+        $data["title"] = "Daftar Komik";
+
+        // query tanpa model
+        // $db = Database::connect();
+        // $listKomik = $db->query("SELECT * FROM komik")->getResult();
+
+        // query dengan model
+        // $komikModel = new KomikModel();
+        // $data["listKomik"] = $komikModel->findAll();
+
+        $data["listKomik"] = $this->komikModel->findAll();
+
+        return view("komik/index", $data);
+    }
+}

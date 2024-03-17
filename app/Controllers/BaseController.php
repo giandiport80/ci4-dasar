@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\KomikModel;
 use CodeIgniter\Controller;
 use CodeIgniter\HTTP\CLIRequest;
 use CodeIgniter\HTTP\IncomingRequest;
@@ -56,5 +57,6 @@ abstract class BaseController extends Controller
         // E.g.: $this->session = \Config\Services::session();
 
         $this->nama = "Gian Nurwana";
+        // $this->komikModel = new KomikModel();
     }
 }
