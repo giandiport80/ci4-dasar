@@ -1,8 +1,22 @@
 <?php
 
+use App\Controllers\Admin\Dashboard;
+use App\Controllers\Coba;
+use App\Controllers\Home;
 use CodeIgniter\Router\RouteCollection;
 
 /**
  * @var RouteCollection $routes
  */
-$routes->get('/', 'Home::index');
+// $routes->get('/', 'Home::index');
+
+$routes->get('/', [Home::class, 'index']);
+$routes->get('/home/coba', [Home::class, 'coba']);
+$routes->get("/coba", [Coba::class, "index"]);
+$routes->get("/about/(:segment)/(:segment)", [Coba::class, "about"]);
+
+$routes->get("admin", [Dashboard::class, "index"]);
+
+$routes->get("/fungsi", function () {
+    return "ini function";
+});
