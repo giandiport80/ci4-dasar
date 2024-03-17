@@ -23,4 +23,5 @@ $routes->get("/fungsi", function () {
 });
 
 $routes->get("/", [Pages::class, "index"]);
-$routes->get("about", [Pages::class, "about"]);
+$routes->get("/about", [Pages::class, "about"]);
+$routes->get("/contact", [Pages::class, "contact"]);

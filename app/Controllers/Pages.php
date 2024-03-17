@@ -11,16 +11,36 @@ class Pages extends BaseController
     {
         $data["title"] = "Home";
 
-        echo view("layout/header", $data);
-        echo view("pages/home");
-        echo view("layout/footer");
+        // echo view("layout/header", $data);
+        // echo view("pages/home");
+        // echo view("layout/footer");
+
+        return view("pages/home", $data);
     }
 
     public function about()
     {
         $data["title"] = "About";
-        echo view("layout/header", $data);
-        echo view("pages/about");
-        echo view("layout/footer");
+
+        return view("pages/about", $data);
+    }
+
+    public function contact()
+    {
+        $data["title"] = "Contact Us";
+        $data["alamat"] = [
+            [
+                "tipe" => "Rumah",
+                "alamat" => "jl abc no 123",
+                "kota" => "Kab. Tangerang"
+            ],
+            [
+                "tipe" => "Kantor",
+                "alamat" => "jl jeruk no 12",
+                "kota" => "Tangerang"
+            ],
+        ];
+
+        return view("pages/contact", $data);
     }
 }
