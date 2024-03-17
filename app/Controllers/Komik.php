@@ -7,6 +7,7 @@ use App\Models\KomikModel;
 use CodeIgniter\Exceptions\PageNotFoundException;
 use CodeIgniter\HTTP\ResponseInterface;
 use Config\Database;
+use Config\Services;
 
 class Komik extends BaseController
 {
@@ -51,12 +52,21 @@ class Komik extends BaseController
     public function create()
     {
         $data["title"] = "Tambah Komik";
+        $data["validation"] = Services::validation();
 
         return view("komik/create", $data);
     }
 
     public function save()
     {
+        $is_valid = $this->validate([
+            "judul" => "required|is_unique[komik.judul]",
+        ]);
+
+        if (!$is_valid) {
+            return redirect()->back()->withInput();
+        }
+
         $slug = url_title($this->request->getPost("judul"), "-", "true");
 
         $this->komikModel->save([
