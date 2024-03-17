@@ -21,7 +21,7 @@
                             <th scope="row"><?= $no; ?></th>
                             <td><img src="/img/<?= $komik->sampul ?>" class="sampul" alt=""></td>
                             <td><?= $komik->judul ?></td>
-                            <td><a href="" class="btn btn-success">Detail</a></td>
+                            <td><a href="<?= base_url("komik/" . $komik->slug) ?>" class="btn btn-success">Detail</a></td>
                         </tr>
                         <?php $no++; ?>
                     <?php endforeach; ?>

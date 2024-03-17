@@ -40,4 +40,13 @@ class KomikModel extends Model
     // protected $afterFind      = [];
     // protected $beforeDelete   = [];
     // protected $afterDelete    = [];
+
+    public function getKomik($slug = null)
+    {
+        if (!$slug) {
+            return $this->findAll();
+        }
+
+        return $this->where("slug", $slug)->first();
+    }
 }

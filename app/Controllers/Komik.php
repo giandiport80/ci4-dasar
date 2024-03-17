@@ -28,8 +28,18 @@ class Komik extends BaseController
         // $komikModel = new KomikModel();
         // $data["listKomik"] = $komikModel->findAll();
 
-        $data["listKomik"] = $this->komikModel->findAll();
+        // $data["listKomik"] = $this->komikModel->findAll();
+        $data["listKomik"] = $this->komikModel->getKomik();
 
         return view("komik/index", $data);
+    }
+
+    public function detail($slug)
+    {
+        $data["title"] = "Detail komik";
+        // $komik = $this->komikModel->where("slug", $slug)->first();
+        $data['komik'] = $this->komikModel->getKomik($slug);
+
+        return view("komik/detail", $data);
     }
 }
