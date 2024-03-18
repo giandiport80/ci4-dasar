@@ -90,4 +90,50 @@ class Komik extends BaseController
 
         return redirect()->to("/komik");
     }
+
+    public function edit($slug)
+    {
+        $data["title"] = "Edit Komik";
+        $data["validation"] = Services::validation();
+        $data["komik"] = $this->komikModel->getKomik($slug);
+
+        return view("komik/edit", $data);
+    }
+
+    public function update($id)
+    {
+        $komik = $this->komikModel->getKomik($this->request->getPost("slug"));
+
+        if ($komik->judul == $this->request->getPost("judul")) {
+            $rule_judul = 'required';
+        } else {
+            $rule_judul = "required|is_unique[komik.judul]";
+        }
+
+        $is_valid = $this->validate([
+            "judul" => $rule_judul,
+        ]);
+
+        if (!$is_valid) {
+            return redirect()->back()->withInput();
+        }
+
+        $slug = url_title($this->request->getPost("judul"), "-", "true");
+        $formData = [
+            "id" => $id,
+            "judul" => $this->request->getPost("judul"),
+            "slug" => $slug,
+            "penulis" => $this->request->getPost("penulis"),
+            "penerbit" => $this->request->getPost("penerbit"),
+            "sampul" => $this->request->getPost("sampul"),
+        ];
+
+        // $this->komikModel->save($formData);
+
+        $this->komikModel->update($id, $formData);
+
+        session()->setFlashdata("pesan", "Data berhasil diupdate");
+
+        return redirect()->to(url_to("komik.detail", $slug));
+    }
 }

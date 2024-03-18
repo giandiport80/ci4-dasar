@@ -6,6 +6,16 @@
     <h3>Detail Komik</h3>
     <div class="row">
         <div class="col">
+
+            <?php if (session()->getFlashdata("pesan")) : ?>
+                <div class="alert alert-success alert-dismissible fade show mb-3" role="alert">
+                    <strong><?= session()->getFlashdata("pesan") ?></strong>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            <?php endif; ?>
+
             <div class="card mb-3" style="max-width: 540px;">
                 <div class="row no-gutters">
                     <div class="col-md-4">
@@ -17,7 +27,7 @@
                             <p class="card-text">Penulis: <?= $komik->penulis ?></p>
                             <p class="card-text text-muted">Penerbit: <?= $komik->penerbit ?></p>
                             <div class="mb-3">
-                                <a href="" class="btn btn-warning">Edit</a>
+                                <a href="<?= base_url("komik/" . $komik->slug . "/edit") ?>" class="btn btn-warning">Edit</a>
 
                                 <form action="<?= base_url("komik/" . $komik->id) ?>" method="post" class="d-inline">
                                     <?php csrf_hash() ?>

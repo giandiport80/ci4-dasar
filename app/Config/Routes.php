@@ -27,8 +27,10 @@ $routes->get("/", [Pages::class, "index"]);
 $routes->get("/about", [Pages::class, "about"]);
 $routes->get("/contact", [Pages::class, "contact"]);
 
-$routes->get("/komik", [Komik::class, "index"]);
+$routes->get("/komik", [Komik::class, "index"], ["as" => "komik.index"]); // naming route
 $routes->get("/komik/create", [Komik::class, "create"]);
+$routes->get("/komik/(:segment)/edit", [Komik::class, "edit"]);
+$routes->put("/komik/(:segment)", [Komik::class, "update"]);
 $routes->post("/komik/save", [Komik::class, "save"]);
 $routes->delete("/komik/(:num)", [Komik::class, "delete"]);
-$routes->get("/komik/(:segment)", [Komik::class, "detail"]);
+$routes->get("/komik/(:segment)", [Komik::class, "detail"], ["as" => "komik.detail"]);
