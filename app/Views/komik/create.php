@@ -35,9 +35,12 @@
 
                 <div class="form-group row">
                     <label for="sampul" class="col-sm-2 col-form-label">Sampul</label>
-                    <div class="col-sm-10">
+                    <div class="col-sm-2">
+                        <img src="<?= base_url("img/default.png") ?>" class="img-thumbnail img-preview" alt="">
+                    </div>
+                    <div class="col-sm-8">
                         <div class="custom-file">
-                            <input type="file" name="sampul" class="custom-file-input  <?= ($validation->hasError("sampul") ? "is-invalid" : "") ?>" id="sampul">
+                            <input type="file" name="sampul" class="custom-file-input  <?= ($validation->hasError("sampul") ? "is-invalid" : "") ?>" id="sampul" onchange="previewImage()">
                             <label class="custom-file-label" for="sampul">Pilih Gambar</label>
                         </div>
                         <div class="invalid-feedback">

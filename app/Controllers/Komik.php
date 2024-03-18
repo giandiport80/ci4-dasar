@@ -116,6 +116,12 @@ class Komik extends BaseController
 
     public function delete($id)
     {
+        $komik = $this->komikModel->find($id);
+
+        if ($komik->sampul != "default.png") {
+            unlink("img/" . $komik->sampul);
+        }
+
         $this->komikModel->delete($id);
 
         session()->setFlashdata("pesan", "Data berhasil dihapus");
