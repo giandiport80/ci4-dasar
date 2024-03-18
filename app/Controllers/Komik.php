@@ -150,10 +150,32 @@ class Komik extends BaseController
 
         $is_valid = $this->validate([
             "judul" => $rule_judul,
+            "sampul" => [
+                "rules" => "max_size[sampul,2048]|is_image[sampul]|mime_in[sampul,image/jpg,image/jpeg,image/png]",
+                "errors" => [
+                    "max_size" => "ukuran gambar terlalu besar",
+                    "is_image" => "yang anda pilih bukan gambar",
+                    "mime_in" => "Yang anda pilih bukan gambar",
+                ]
+            ]
         ]);
 
         if (!$is_valid) {
             return redirect()->back()->withInput();
+        }
+
+        $fileSampul = $this->request->getFile("sampul");
+
+        // cek gambar, apakah tetap gambar lama
+        if ($fileSampul->getError() == 4) {
+            $namaSampul = $this->request->getPost("sampulLama");
+        } else {
+            // generate file random
+            $namaSampul = $fileSampul->getRandomName();
+            // pindahkan gambar
+            $fileSampul->move("img", $namaSampul);
+            // hapus file lama
+            unlink("img/" . $this->request->getPost("sampulLama"));
         }
 
         $slug = url_title($this->request->getPost("judul"), "-", "true");
@@ -163,7 +185,7 @@ class Komik extends BaseController
             "slug" => $slug,
             "penulis" => $this->request->getPost("penulis"),
             "penerbit" => $this->request->getPost("penerbit"),
-            "sampul" => $this->request->getPost("sampul"),
+            "sampul" => $namaSampul,
         ];
 
         // $this->komikModel->save($formData);
