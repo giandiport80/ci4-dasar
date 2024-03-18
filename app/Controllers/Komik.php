@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Models\KomikModel;
+use CodeIgniter\Config\Services as ConfigServices;
 use CodeIgniter\Exceptions\PageNotFoundException;
 use CodeIgniter\HTTP\ResponseInterface;
 use Config\Database;
@@ -61,11 +62,36 @@ class Komik extends BaseController
     {
         $is_valid = $this->validate([
             "judul" => "required|is_unique[komik.judul]",
+            "sampul" => [
+                "rules" => "uploaded[sampul]|max_size[sampul,2048]|is_image[sampul]|mime_in[sampul,image/jpg,image/jpeg,image/png]",
+                "errors" => [
+                    "uploaded" => "pilih gambar sampul terlebih dahulu",
+                    "max_size" => "ukuran gambar terlalu besar",
+                    "is_image" => "yang anda pilih bukan gambar",
+                    "mime_in" => "Yang anda pilih bukan gambar",
+                ]
+            ]
         ]);
 
         if (!$is_valid) {
-            return redirect()->back()->withInput();
+            $validation = ConfigServices::validation();
+            dd($validation);
+            return redirect()->to(url_to("komik.create"))->withInput();
         }
+
+        // ambil gambar
+        $fileSampul = $this->request->getFile("sampul");
+
+        // ambil nama file
+        // $namaSampul = $fileSampul->getName();
+
+        // generate nama sampul
+        $namaSampul = $fileSampul->getRandomName();
+
+        // pindahkan file / relative terhadapt public
+        $fileSampul->move("img", $namaSampul);
+
+        // dd($fileSampul);
 
         $slug = url_title($this->request->getPost("judul"), "-", "true");
 
@@ -74,7 +100,7 @@ class Komik extends BaseController
             "slug" => $slug,
             "penulis" => $this->request->getPost("penulis"),
             "penerbit" => $this->request->getPost("penerbit"),
-            "sampul" => $this->request->getPost("sampul"),
+            "sampul" => $namaSampul,
         ]);
 
         session()->setFlashdata("pesan", "Data berhasil ditambahkan");

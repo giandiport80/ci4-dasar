@@ -6,7 +6,7 @@
         <div class="col-8">
             <h2 class="my-3">Form Tambah Komik</h2>
 
-            <form action="<?= base_url("komik/save") ?>" method="post">
+            <form action="<?= base_url("komik/save") ?>" method="post" enctype="multipart/form-data">
                 <?= csrf_field() ?>
 
                 <div class="form-group row">
@@ -36,7 +36,14 @@
                 <div class="form-group row">
                     <label for="sampul" class="col-sm-2 col-form-label">Sampul</label>
                     <div class="col-sm-10">
-                        <input type="text" name="sampul" value="<?= old("sampul") ?>" class="form-control" id="sampul">
+                        <div class="custom-file">
+                            <input type="file" name="sampul" class="custom-file-input  <?= ($validation->hasError("sampul") ? "is-invalid" : "") ?>" id="sampul">
+                            <label class="custom-file-label" for="sampul">Pilih Gambar</label>
+                        </div>
+                        <div class="invalid-feedback">
+                            <?= $validation->getError("sampul") ?>
+                        </div>
+                        <!-- <input type="text" name="sampul" value="<?= old("sampul") ?>" class="form-control" id="sampul"> -->
                     </div>
                 </div>
 
