@@ -30,4 +30,5 @@ $routes->get("/contact", [Pages::class, "contact"]);
 $routes->get("/komik", [Komik::class, "index"]);
 $routes->get("/komik/create", [Komik::class, "create"]);
 $routes->post("/komik/save", [Komik::class, "save"]);
+$routes->delete("/komik/(:num)", [Komik::class, "delete"]);
 $routes->get("/komik/(:segment)", [Komik::class, "detail"]);

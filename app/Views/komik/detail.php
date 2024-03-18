@@ -18,7 +18,13 @@
                             <p class="card-text text-muted">Penerbit: <?= $komik->penerbit ?></p>
                             <div class="mb-3">
                                 <a href="" class="btn btn-warning">Edit</a>
-                                <a href="" class="btn btn-danger">Delete</a>
+
+                                <form action="<?= base_url("komik/" . $komik->id) ?>" method="post" class="d-inline">
+                                    <?php csrf_hash() ?>
+                                    <input type="hidden" name="_method" value="DELETE">
+
+                                    <button type="submit" onclick="return confirm('Hapus komik?')" class="btn btn-danger">Delete</button>
+                                </form>
                             </div>
 
                             <a href="<?= base_url("komik") ?>">Kembali ke daftar Komik</a>
