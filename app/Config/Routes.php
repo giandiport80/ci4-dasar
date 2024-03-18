@@ -4,6 +4,7 @@ use App\Controllers\Admin\Dashboard;
 use App\Controllers\Coba;
 use App\Controllers\Home;
 use App\Controllers\Komik;
+use App\Controllers\Orang;
 use App\Controllers\Pages;
 use CodeIgniter\Router\RouteCollection;
 
@@ -35,3 +36,5 @@ $routes->put("/komik/(:segment)", [Komik::class, "update"]);
 $routes->post("/komik/save", [Komik::class, "save"]);
 $routes->delete("/komik/(:num)", [Komik::class, "delete"]);
 $routes->get("/komik/(:segment)", [Komik::class, "detail"], ["as" => "komik.detail"]);
+
+$routes->get("/orang", [Orang::class, "index"], ["as" => "orang.index"]);
