@@ -1,3 +1,29 @@
+# CRUD CODEIGNITER 4 DASAR
+
+Belajar Codeigniter 4 Dasar yang mencakup:
+- Routing
+- Controller
+- Model
+- View
+- Upload file
+- Migration
+- Seeder & Faker
+- Pagination
+- Searching
+
+### Daftar Komik
+
+![alt](docs/gambar1.png)
+
+### Detail Komik
+
+![alt](docs/gambar3.png)
+
+### Daftar Orang
+
+![alt](docs/gambar2.png)
+
+
 # CodeIgniter 4 Application Starter
 
 ## What is CodeIgniter?
