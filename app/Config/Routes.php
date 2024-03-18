@@ -26,6 +26,7 @@ $routes->get("/fungsi", function () {
 $routes->get("/", [Pages::class, "index"]);
 $routes->get("/about", [Pages::class, "about"]);
 $routes->get("/contact", [Pages::class, "contact"]);
+$routes->get("/faker", [Pages::class, "faker"]);
 
 $routes->get("/komik", [Komik::class, "index"], ["as" => "komik.index"]); // naming route
 $routes->get("/komik/create", [Komik::class, "create"], ["as" => "komik.create"]);

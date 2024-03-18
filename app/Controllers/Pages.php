@@ -4,9 +4,17 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use CodeIgniter\HTTP\ResponseInterface;
+use Faker\Factory;
 
 class Pages extends BaseController
 {
+    public function faker()
+    {
+        $faker = Factory::create("id_ID");
+
+        dd($faker->name());
+    }
+
     public function index()
     {
         $data["title"] = "Home";
