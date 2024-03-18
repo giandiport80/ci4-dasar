@@ -17,12 +17,18 @@ class Orang extends BaseController
 
     public function index()
     {
+        $totalData = 10;
         $currentPage = $this->request->getGet("page_orang") ?? 1;
+        $keyword = $this->request->getGet("keyword") ?? "";
+        $listOrang = $this->orangModel->searchPaginate($keyword, $totalData);
 
-        $data["title"] = "Daftar Komik";
         // 10: jumlah param, orang: nama table
-        $data["totalData"] = 10;
-        $data["listOrang"] = $this->orangModel->paginate($data["totalData"], "orang");
+        // $data["listOrang"] = $this->orangModel->paginate($totalData, "orang");
+
+        $data["keyword"] = $keyword;
+        $data["title"] = "Daftar Komik";
+        $data["totalData"] = $totalData;
+        $data["listOrang"] = $listOrang;
         $data["pager"] = $this->orangModel->pager;
         $data["currentPage"] = $currentPage;
 

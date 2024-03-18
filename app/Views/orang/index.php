@@ -3,8 +3,21 @@
 <?= $this->section("content"); ?>
 <div class="container">
     <div class="row">
+        <div class="col-md-6">
+            <h1 class="my-3">Daftar Orang</h1>
+
+            <form action="" method="get">
+                <div class="input-group mb-3">
+                    <input type="text" name="keyword" value="<?= $keyword ?>" class="form-control" placeholder="Masukkan Keyword" autocomplete="off">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Cari</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="row">
         <div class="col">
-            <h1>Daftar Orang</h1>
 
             <table class="table">
                 <thead>

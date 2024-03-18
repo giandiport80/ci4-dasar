@@ -39,4 +39,15 @@ class OrangModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    public function searchPaginate($keyword, $totalData = 10)
+    {
+        // 10: jumlah param, orang: nama table
+
+        if ($keyword) {
+            return $this->like("nama", $keyword)->paginate($totalData, "orang");
+        } else {
+            return $this->paginate($totalData, "orang");
+        }
+    }
 }
