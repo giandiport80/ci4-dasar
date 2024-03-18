@@ -63,9 +63,10 @@ class Komik extends BaseController
         $is_valid = $this->validate([
             "judul" => "required|is_unique[komik.judul]",
             "sampul" => [
-                "rules" => "uploaded[sampul]|max_size[sampul,2048]|is_image[sampul]|mime_in[sampul,image/jpg,image/jpeg,image/png]",
+                // "rules" => "uploaded[sampul]|max_size[sampul,2048]|is_image[sampul]|mime_in[sampul,image/jpg,image/jpeg,image/png]",
+                "rules" => "max_size[sampul,2048]|is_image[sampul]|mime_in[sampul,image/jpg,image/jpeg,image/png]",
                 "errors" => [
-                    "uploaded" => "pilih gambar sampul terlebih dahulu",
+                    // "uploaded" => "pilih gambar sampul terlebih dahulu",
                     "max_size" => "ukuran gambar terlalu besar",
                     "is_image" => "yang anda pilih bukan gambar",
                     "mime_in" => "Yang anda pilih bukan gambar",
@@ -82,14 +83,19 @@ class Komik extends BaseController
         // ambil gambar
         $fileSampul = $this->request->getFile("sampul");
 
-        // ambil nama file
-        // $namaSampul = $fileSampul->getName();
+        // apakah tidak ada gambar yang diupload
+        if ($fileSampul->getError() == 4) {
+            $namaSampul = "default.png";
+        } else {
+            // ambil nama file
+            // $namaSampul = $fileSampul->getName();
 
-        // generate nama sampul
-        $namaSampul = $fileSampul->getRandomName();
+            // generate nama sampul
+            $namaSampul = $fileSampul->getRandomName();
 
-        // pindahkan file / relative terhadapt public
-        $fileSampul->move("img", $namaSampul);
+            // pindahkan file / relative terhadapt public
+            $fileSampul->move("img", $namaSampul);
+        }
 
         // dd($fileSampul);
 
