@@ -13,7 +13,7 @@ Belajar Codeigniter 4 Dasar yang mencakup:
 
 ### Daftar Komik
 
-![alt](docs/gambar1.png)
+![alt](docs/gambar2.png)
 
 ### Detail Komik
 
@@ -21,8 +21,7 @@ Belajar Codeigniter 4 Dasar yang mencakup:
 
 ### Daftar Orang
 
-![alt](docs/gambar2.png)
-
+![alt](docs/gambar1.png)
 
 # CodeIgniter 4 Application Starter
 
